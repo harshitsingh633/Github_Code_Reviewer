@@ -3,12 +3,8 @@ import { signinSchema, signupSchema }  from "../schemas/auth.schema"
 import { createUser, findUser } from "../services/auth.service";
 import jwt from 'jsonwebtoken';
 import "dotenv/config";
-import cookieParser from "cookie-parser";
-import express from "express";
-const app = express();
 
-app.use(cookieParser());
-app.use(express.json());
+
 
 const JWT_SECRET = process.env.JWT_PASSWORD as string;
 
@@ -50,15 +46,25 @@ export const signin = async (req : Request, res : Response) => {
         const user = await findUser(email , password);
 
         if(!user){
-            res.status(500).json({
-                message : "User does not exist"
+            res.status(401).json({
+                message : "Invalid credentials"
             })
         }
 
         const token = jwt.sign({
             userId : user.id
-        },JWT_SECRET)
-        return token;
+        },JWT_SECRET, {expiresIn : "7d"})
+        
+        res.cookie("token", token , { 
+            httpOnly : true,
+            secure : false,
+            sameSite: "lax"
+        })
+
+        return res.json({
+            message : "Logged in successfully"
+        });
+
     }catch(e){
         res.status(500).json({
             error : "Server error"
