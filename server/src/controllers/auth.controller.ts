@@ -8,6 +8,10 @@ import "dotenv/config";
 
 const JWT_SECRET = process.env.JWT_PASSWORD as string;
 
+if(!JWT_SECRET){
+    throw new Error("JWT_SECRET not defined");
+}
+
 export const signup = async (req : Request , res : Response) => {
     try{
         const parsed = signupSchema.safeParse(req.body);
@@ -22,10 +26,10 @@ export const signup = async (req : Request , res : Response) => {
         const user = await createUser(email , password);
 
         res.json({
-            message : "User created",
-            user
+            message : "User created"
         })
     }catch(e){
+        console.log(e)
         res.status(500).json({
             error: "Server error"
         })
@@ -46,7 +50,7 @@ export const signin = async (req : Request, res : Response) => {
         const user = await findUser(email , password);
 
         if(!user){
-            res.status(401).json({
+            return res.status(401).json({
                 message : "Invalid credentials"
             })
         }

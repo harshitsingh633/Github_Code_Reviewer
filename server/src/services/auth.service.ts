@@ -1,19 +1,20 @@
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { prisma } from "../utils/prisma";
 
+const prisma = new PrismaClient();
 
-export const createUser = async (email : string , password : string) =>{
-    const hashedPassword = await bcrypt.hash(password , 10);
+export const createUser = async (email: string, password: string) => {
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = prisma.user.create({
-        data : {
-            email,
-            password : hashedPassword
-        }
-    });
+  const user = await prisma.user.create({
+    data: {
+      email: email,
+      password: hashedPassword,
+    },
+  });
 
-    return user;
-}
+  return user;
+};
 
 export const findUser = async (email : string , password : string) => {
     const user = await prisma.user.findUnique({
@@ -21,13 +22,13 @@ export const findUser = async (email : string , password : string) => {
     });
 
     if(!user){
-        throw new Error('User not found');
+        return null;
     }
 
-    const isPasswordValid = await bcrypt.compare(password , user.password);
+    const isPasswordValid = await bcrypt.compare(password , user.password as string);
 
     if(!isPasswordValid){
-        throw new Error("Invalid password");
+        return null;
     }
 
     return user;
