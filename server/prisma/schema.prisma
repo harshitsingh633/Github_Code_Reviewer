@@ -15,7 +15,7 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
-  githubId  String?
+  githubId  String?  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   password  String?

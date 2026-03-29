@@ -3,6 +3,7 @@ import { signinSchema, signupSchema }  from "../schemas/auth.schema"
 import { createUser, findUser } from "../services/auth.service";
 import jwt from 'jsonwebtoken';
 import "dotenv/config";
+import axios from "axios";
 
 
 
@@ -75,3 +76,12 @@ export const signin = async (req : Request, res : Response) => {
         })
     }
 }
+
+export const githubLogin = (req: Request, res: Response) => {
+    const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+
+    const redirectUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`;
+
+    res.redirect(redirectUrl);
+}
+
