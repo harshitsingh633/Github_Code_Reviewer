@@ -5,7 +5,10 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin : "http://localhost:5173",
+    credentials : true
+}));
 app.use(express.json());
 
 app.use("/api", authRoutes);
@@ -15,6 +18,5 @@ app.get("/", (req : Request , res : Response) => {
 })
 
 app.listen(3000 , () => {
-    console.log("Database Url" , process.env.DATABASE_URL);
     console.log("Server is running on 3000 port");
 })

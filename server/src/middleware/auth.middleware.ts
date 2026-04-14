@@ -12,11 +12,11 @@ export const authMiddleware = (
         const token = req.cookies.token;
 
         if(!token){
-            res.status(401).json({
+            return res.status(401).json({
                 message : "Unauthorized"
             })
         }
-
+        
         const decoded = jwt.verify(token , JWT_SECRET) as { userId : number};
 
         (req as any).userId = decoded.userId;
