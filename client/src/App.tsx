@@ -1,13 +1,13 @@
 import './App.css'
-import Login from './components/Login'
 
 function App() {
 
 
   return (
-    <div className='w-full h-full'>
-      <Login />
-    </div>
+    <div className='w-screen h-screen'>
+      
+</div>
+
   )
 }
 
