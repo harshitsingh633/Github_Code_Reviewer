@@ -1,5 +1,5 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
-
 
 const Login = () => {
   return (
@@ -22,6 +22,7 @@ const Login = () => {
 };
 
 const InputForm = () => {
+  const navigate = useNavigate();
   return (
     <div className="pt-4">
       <form className="flex flex-col space-y-3 w-full">
@@ -63,7 +64,11 @@ const InputForm = () => {
 
         <p className="text-center text-sm">
           Don't have an account?
-          <a className="cursor-pointer underline ml-1">
+          <a className="cursor-pointer underline ml-1" 
+          onClick={() => {
+            navigate("/signup")
+          }}
+          >
             Sign up
           </a>
         </p>

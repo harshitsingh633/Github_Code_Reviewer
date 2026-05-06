@@ -17,7 +17,7 @@ const sizeStyles = {
 
 const variantStyles = {
   primary: "mt-4 cursor-pointer",
-  secondary: "bg-purple-400 text-purple-600",
+  secondary: "cursor-pointer text-purple-600",
 };
 
 export const Button = (props: ButtonInterface) => {
