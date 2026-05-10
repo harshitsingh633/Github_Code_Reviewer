@@ -19,7 +19,6 @@ async function main(code : string){
     if(!json) throw new Error("Invalid AI response");
 
     return JSON.parse(json[0]);
-
 }
 
 const sampleCode = `
