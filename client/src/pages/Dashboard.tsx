@@ -1,9 +1,13 @@
-import React from 'react'
+import NavBar from "../components/NavBar";
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
 
-export default Dashboard
+  
+  return (
+    <div className="w-screen h-screen overflow-x-hidden">
+      <NavBar />
+    </div>
+  );
+};
+
+export default Dashboard;

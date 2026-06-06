@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
+import { useState } from "react";
+import api from "../api/axios";
 
 const Login = () => {
   return (
@@ -23,14 +25,39 @@ const Login = () => {
 
 const InputForm = () => {
   const navigate = useNavigate();
+  const [email , setEmail] = useState("");
+  const [password , setPassword] = useState("");
+
+  const handleLogin = async() => {
+    try{
+      const response = await api.post("/signin",{
+        email , password
+      });
+      console.log(response.data);
+      navigate("/dashboard")
+    }catch(error){
+      console.error(error);
+    }
+  }
+  
+  const gitOAuth =() =>{
+    window.location.href = "http://localhost:5000/api/auth/github";
+  }
+
   return (
     <div className="pt-4">
-      <form className="flex flex-col space-y-3 w-full">
+      <div onSubmit={(e) => {
+        e.preventDefault();
+        handleLogin();
+      }} className="flex flex-col space-y-3 w-full">
         <label className="text-sm font-[550]">Email</label>
         <input
           className="outline-gray-400 outline-1 w-full rounded-md h-9 text-sm pl-2"
           type="email"
           placeholder="m@example.com"
+          onChange={e => {
+            setEmail(e.target.value)
+          }}
         />
 
         <label className="text-sm font-[550] flex justify-between">
@@ -44,7 +71,9 @@ const InputForm = () => {
           className="outline-gray-400 outline-1 w-full rounded-md h-9 text-sm pl-2"
           type="password"
           placeholder="Password"
-          
+          onChange={(e) => {
+            setPassword(e.target.value)
+          }}
         />
 
         <Button
@@ -52,14 +81,15 @@ const InputForm = () => {
           size="md"
           variant="primary"
           className="w-full text-white bg-black"
+          onClick={handleLogin}
         />
 
         <Button
-          title="Login with Google"
+          title="Login with Github"
           size="md"
           variant="primary"
           className="w-full bg-neutral-300"
-          startIcon = ""
+          onClick={gitOAuth}
         />
 
         <p className="text-center text-sm">
@@ -72,7 +102,7 @@ const InputForm = () => {
             Sign up
           </a>
         </p>
-      </form>
+      </div>
     </div>
   );
 };
