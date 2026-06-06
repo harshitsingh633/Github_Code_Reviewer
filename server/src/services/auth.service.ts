@@ -42,7 +42,6 @@ export const findUser = async (email : string , password : string) => {
 export const githubCallback = async (req : Request , res : Response) => {
     const code = req.query.code as string;
 
-    console.log("Code",code);
     try{
         const tokenRes = await axios.post(
             "https://github.com/login/oauth/access_token",{
@@ -59,7 +58,6 @@ export const githubCallback = async (req : Request , res : Response) => {
 
         const access_token = tokenRes.data.access_token;
 
-        console.log("Token Response" , tokenRes.data);
 
         const userRes = await axios.get("https://api.github.com/user",{
             headers : {
@@ -103,7 +101,7 @@ export const githubCallback = async (req : Request , res : Response) => {
           path : '/'
         })
 
-      return res.send("Github login Successful")
+      return res.redirect("http://localhost:5173/dashboard");
     }catch(e){
       console.error(e)
       res.status(500).json({ message : "Github auth failed"});

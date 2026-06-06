@@ -4,9 +4,6 @@ import { createUser, findUser } from "../services/auth.service";
 import jwt from 'jsonwebtoken';
 import "dotenv/config";
 
-
-
-
 const JWT_SECRET = process.env.JWT_PASSWORD as string;
 
 if(!JWT_SECRET){
@@ -76,12 +73,11 @@ export const signin = async (req: Request, res: Response) => {
     });
   }
 };
+
 export const githubLogin = (req : Request ,res: Response) => {
     try{
 
     const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-    console.log("ID:", process.env.GITHUB_CLIENT_ID);
-console.log("SECRET:", process.env.GITHUB_CLIENT_SECRET);
 
     
     if(!CLIENT_ID){
@@ -90,10 +86,22 @@ console.log("SECRET:", process.env.GITHUB_CLIENT_SECRET);
         })
     }
 
-    const redirectUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`;
+    const redirectUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&prompt=select_account`;
 
     res.redirect(redirectUrl);
     }catch(e){
         return console.log(e);
     }
+}
+
+export const logOut = (req : Request , res : Response) => {
+    res.clearCookie("token",{
+      httpOnly : true,
+      sameSite : "lax",
+      secure : false,
+      path : "/"
+    });
+    return res.status(200).json({
+    message: "Logged out successfully",
+  });
 }

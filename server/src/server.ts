@@ -17,6 +17,6 @@ app.get("/", (req : Request , res : Response) => {
     res.send("AI Github Code Reviewer API");
 })
 
-app.listen(3000 , () => {
-    console.log("Server is running on 3000 port");
+app.listen(5000 , () => {
+    console.log("Server is running on 5000 port");
 })
