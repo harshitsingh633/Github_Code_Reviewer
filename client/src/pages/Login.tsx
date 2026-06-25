@@ -6,16 +6,12 @@ import api from "../api/axios";
 const Login = () => {
   return (
     <div className="w-screen min-h-screen flex justify-center items-center bg-linear-to-br from-cyan-600 px-4">
-      {/* container */}
       <div className="w-full max-w-md">
         <div className="w-full bg-white rounded-2xl p-6 shadow">
-          <h1 className="text-md font-semibold">
-            Login to your account
-          </h1>
+          <h1 className="text-md font-semibold">Login to your account</h1>
           <p className="text-sm text-[#737373] mt-1">
             Enter your email below to login to your account
           </p>
-
           <InputForm />
         </div>
       </div>
@@ -25,38 +21,42 @@ const Login = () => {
 
 const InputForm = () => {
   const navigate = useNavigate();
-  const [email , setEmail] = useState("");
-  const [password , setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = async() => {
-    try{
-      const response = await api.post("/signin",{
-        email , password
+  const handleLogin = async () => {
+    try {
+      const response = await api.post("/signin", {
+        email,
+        password,
       });
       console.log(response.data);
-      navigate("/dashboard")
-    }catch(error){
+      navigate("/dashboard");
+    } catch (error) {
       console.error(error);
     }
-  }
-  
-  const gitOAuth =() =>{
+  };
+
+  const gitOAuth = () => {
     window.location.href = "http://localhost:5000/api/auth/github";
-  }
+  };
 
   return (
     <div className="pt-4">
-      <div onSubmit={(e) => {
-        e.preventDefault();
-        handleLogin();
-      }} className="flex flex-col space-y-3 w-full">
+      <div
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin();
+        }}
+        className="flex flex-col space-y-3 w-full"
+      >
         <label className="text-sm font-[550]">Email</label>
         <input
           className="outline-gray-400 outline-1 w-full rounded-md h-9 text-sm pl-2"
           type="email"
           placeholder="m@example.com"
-          onChange={e => {
-            setEmail(e.target.value)
+          onChange={(e) => {
+            setEmail(e.target.value);
           }}
         />
 
@@ -72,7 +72,7 @@ const InputForm = () => {
           type="password"
           placeholder="Password"
           onChange={(e) => {
-            setPassword(e.target.value)
+            setPassword(e.target.value);
           }}
         />
 
@@ -94,10 +94,11 @@ const InputForm = () => {
 
         <p className="text-center text-sm">
           Don't have an account?
-          <a className="cursor-pointer underline ml-1" 
-          onClick={() => {
-            navigate("/signup")
-          }}
+          <a
+            className="cursor-pointer underline ml-1"
+            onClick={() => {
+              navigate("/signup");
+            }}
           >
             Sign up
           </a>

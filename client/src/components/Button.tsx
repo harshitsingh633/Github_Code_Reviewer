@@ -6,7 +6,7 @@ interface ButtonInterface {
   variant: "primary" | "secondary";
   onClick?: () => void;
   className?: string;
-  startIcon ?: React.ReactNode;
+  startIcon?: React.ReactNode;
 }
 
 const sizeStyles = {
