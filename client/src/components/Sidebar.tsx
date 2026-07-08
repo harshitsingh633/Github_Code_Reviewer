@@ -40,13 +40,13 @@ export const Sidebar = () => {
 
   return (
     <aside
-      className={`h-screen flex flex-col bg-linear-to-b from-cyan-700 to-cyan-200 text-white shadow-2xl transition-all duration-300 relative font-sans ${isExpandable ? "w-64" : "w-20"}`}
+      className={`h-screen flex flex-col bg-gray-100 dark:bg-[#202124] text-black dark:text-white shadow-2xl transition-all duration-300 relative font-sans ${isExpandable ? "w-64" : "w-20"}`}
     >
-      <div className="p-4 flex justify-between items-center h-16 border-b border-cyan-500/40">
+      <div className="p-4 flex justify-between items-center border-[#202124] dark:border-white">
         <span
           className={`font-bold tracking-wide transition-all duration-200 overflow-hidden whitespace-nowrap ${isExpandable ? "opacity-100 w-auto" : "opacity-0 w-0"}`}
         >
-          WORKSPACE
+          Reviews
         </span>
         <button
           onClick={() => setIsExpandable(!isExpandable)}
@@ -56,7 +56,7 @@ export const Sidebar = () => {
         </button>
       </div>
 
-      <ul className="flex-1 p-3 space-y-1">
+      <ul className="flex-1 p-3 space-y-1 text-white">
         {menuItems.map((item, index) => (
           <li
             className="flex items-center justify-between h-12 px-3 rounded-xl hover:bg-white/10 active:bg-white/15 transition-all duration-200 cursor-pointer group relative"
@@ -74,11 +74,11 @@ export const Sidebar = () => {
             </div>
 
             {isExpandable && (
-              <div className="w-1.5 h-1.5 rounded-full bg-cyan-200 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="w-1.5 h-1.5 rounded-full bg-purple-300 opacity-0 group-hover:opacity-100 transition-opacity" />
             )}
 
             {!isExpandable && (
-              <div className="absolute left-full top-1/2 -translate-y-1/2 ml-4 px-3 py-1.5 bg-white text-cyan-700 text-xs font-semibold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 shadow-xl transition-all whitespace-nowrap z-50">
+              <div className="absolute left-full top-1/2 -translate-y-1/2 ml-4 px-3 py-1.5 bg-white text-[#5B57D1] text-xs font-semibold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 shadow-xl transition-all whitespace-nowrap z-50">
                 {item.label}
               </div>
             )}
