@@ -29,11 +29,12 @@ export default function RepoCard({ repo }: Props) {
       rel="noopener noreferrer"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="flex h-64 w-full flex-col rounded-xl border border-white/10 bg-zinc-900 p-5 shadow-sm"
+      className="flex h-44 w-full flex-col rounded-xl border border-white/10 bg-zinc-900 p-5 shadow-sm"
     >
       {/* header */}
       <div className="flex items-start justify-between gap-2">
         <h3 className="truncate font-mono text-base font-semibold text-zinc-100">
+          
           {repo.name}
         </h3>
         <span
